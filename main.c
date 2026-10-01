@@ -22,12 +22,12 @@ int main()
     };
 
     const int COR_VERDE = 0;
-    const int COR_AZUL = 1;
+    const int COR_BRANCO = 1;
     const int COR_AMARELO = 2;
 
-    char tentativas[TOTAL_PALAVRAS][TAMANHO_PALAVRAS+1];
+    char tentativas[TENTATIVAS][TAMANHO_PALAVRAS+1];
     char palavraSecreta[TAMANHO_PALAVRAS + 1];
-    int resultado[TOTAL_PALAVRAS][TAMANHO_PALAVRAS+1];
+    int resultado[TENTATIVAS][TAMANHO_PALAVRAS+1];
     int totalDeTentativas = 0;
     int acertou = 0;
 
@@ -57,7 +57,7 @@ int main()
     while((totalDeTentativas < TENTATIVAS) && (acertou != 1))
     {
         printf("Tentativas %d de %d: \n", totalDeTentativas + 1, TENTATIVAS);
-        scanf("%s", &tentativas);
+        scanf("%s", tentativas[totalDeTentativas]);
 
         // comparacao de cada letra com a palavra secreta
         for(int i = 0; i < TAMANHO_PALAVRAS; i++)
@@ -68,7 +68,7 @@ int main()
             {
                 resultado[totalDeTentativas][i] = COR_VERDE;
             } else {
-                resultado[totalDeTentativas][i] = COR_AZUL;
+                resultado[totalDeTentativas][i] = COR_BRANCO;
                 for(int j = 0; j < TAMANHO_PALAVRAS; j++)
                 {
                     if(letra == palavraSecreta[j]) {
@@ -78,7 +78,6 @@ int main()
                 }
             }
         }
-        
         // mostrando o resultado com cores
         for (int i = 0; i < TAMANHO_PALAVRAS; i++)
         {
@@ -96,6 +95,12 @@ int main()
 
         acertou = (strcmp(tentativas[totalDeTentativas], palavraSecreta) == 0);
         totalDeTentativas++;
+    }
+
+    if(acertou) {
+        printf("Parabens, voce acertou em %d tentativa(s)\n", totalDeTentativas);
+    } else {
+        printf("Fim de jogo. A palavra era: %s\n", palavraSecreta);
     }
 
     return 0;
