@@ -78,6 +78,23 @@ int main()
                 }
             }
         }
+        
+        // mostrando o resultado com cores
+        for (int i = 0; i < TAMANHO_PALAVRAS; i++)
+        {
+            char letra = tentativas[totalDeTentativas][i];
+
+            if (resultado[totalDeTentativas][i] == COR_VERDE) {
+                printf(VERDE " %c " RESET, letra);
+            } else if (resultado[totalDeTentativas][i] == COR_AMARELO) {
+                printf(AMARELO " %c " RESET, letra);
+            } else {
+                printf(BRANCO " %c " RESET, letra);
+            }
+        }
+        printf("\n\n");
+
+        acertou = (strcmp(tentativas[totalDeTentativas], palavraSecreta) == 0);
         totalDeTentativas++;
     }
 
